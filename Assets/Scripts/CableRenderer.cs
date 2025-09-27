@@ -4,17 +4,22 @@ using UnityEngine;
 
 public class CableRenderer : MonoBehaviour
 {
-    [SerializeField] private Transform _from;
-    [SerializeField] private Transform _to;
-    private LineRenderer _lr;
+    [SerializeField] private Transform _startPoint;
+    [SerializeField] private Transform _endPoint;
 
-    void Awake() { _lr = GetComponent<LineRenderer>(); }
+    private LineRenderer _line;
 
-    void Update()
+    private void Awake()
     {
-        if (_from == null || _to == null) return;
-        _lr.positionCount = 2;
-        _lr.SetPosition(0, _from.position);
-        _lr.SetPosition(1, _to.position);
+        _line = GetComponent<LineRenderer>();
+        _line.positionCount = 2;
+    }
+
+    private void Update()
+    {
+        if (_startPoint == null || _endPoint == null) return;
+
+        _line.SetPosition(0, _startPoint.position);
+        _line.SetPosition(1, _endPoint.position);
     }
 }
